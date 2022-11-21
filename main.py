@@ -1,35 +1,53 @@
 from inputoutput import*
-
-# contain class
+from bruteforce import*
+from branch_bounds import*
+# readfile 
 W_and_numclasslist = []
 wlist = []
 vlist = []
 clist = []
 
-readfile('INPUT_01.txt',W_and_numclasslist, wlist, vlist, clist)
+print(" Please input 'small dataset' or 'large dataset': ")
+dataset = input()
 
+print(" Please input x of name file INPUT_x.txt: ")
+input = input()
+# change input file name to run each file input
+readfile(dataset + '/' + 'INPUT_'+ input +'.txt',W_and_numclasslist, wlist, vlist, clist)
+
+print("Readfile into list")
 print(W_and_numclasslist)
 print(wlist)
 print(vlist)
 print(clist)
 
-bitlist = [0,1,1,0,1,0,1]
+#change input into list of tuples like: [(weight, cost), (weight, cost), ...]
+parts = []
+i = 0
+while i < len(wlist):
+    parts.append(wlist[i])
+    parts.append(vlist[i])
+    i = i + 1
 
-writefile('output_01.txt', str(W_and_numclasslist[0]), bitlist)
+weight_cost = [(parts[i], parts[i + 1]) for i in range(0, len(parts), 2)]
 
-enumclass= []
-for i in clist:
-    if len(enumclass) == 0:
-        enumclass.append(i)
-    else:
-        check = 0
-        for c in enumclass:
-            if i == c:
-                check = 1
-        if check == 0:
-            enumclass.append(i)
-            
-print(enumclass)
+
+#brute force
+maxvalue, bitlist = brute_force(len(wlist), W_and_numclasslist[0], weight_cost)
+print("Output of bruteforce")
+print(maxvalue)
+print(bitlist)
+
+writefile('output_bruteforce_'+ input +'.txt', maxvalue, bitlist)
+
+#branch_bounds
+maxvalue, bitlist = branch_and_bounds(len(wlist), W_and_numclasslist[0], weight_cost)
+print("Output of branch_and_bounds")
+print(maxvalue)
+print(bitlist)
+
+writefile('output_branch_and_bounds_' + input + '.txt', maxvalue, bitlist)
+
 
 
 

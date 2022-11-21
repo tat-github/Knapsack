@@ -1,0 +1,4 @@
+chạy file main (mỗi lần chạy là 1 file input, tắt terminal sau mỗi lần chạy rồi mở lại để chạy file khác)
+nhập chuỗi 'small dataset' hoặc 'large dataset'
+nhập x cho file INPUT_x.txt để readfile
+x từ 1 đến 5 là small dataset, x từ 6 đến 10 là large dataset 

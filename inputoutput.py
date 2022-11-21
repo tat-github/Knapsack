@@ -20,7 +20,7 @@ def readfile(filename, W_and_numclasslist, wlist, vlist, clist):
 
 def writefile(filename, totalvalue, bitstring):
     openfile = open(filename, mode = 'w')
-    openfile.write(totalvalue+ '\n')
+    openfile.write(str(totalvalue)+ '\n')
     c = 0
     while c <= len(bitstring) - 1:
         if c == len(bitstring) - 1 :
